@@ -1,0 +1,19 @@
+rm all
+sync
+get HiPS(CDS/P/2MASS/color)
+sync
+get VizieR(2MASS-PSC) $1 $2 14'
+sync
+get VizieR(SDSS-DR12) $1 $2 14'
+sync
+xmatch CDS/2MASS-PSC CDS/SDSS-DR12 4.0
+sync
+hide CDS/2MASS-PSC
+sync
+hide CDS/SDSS-DR12
+sync
+filter Filter3 {${class_tab2}=6 && ${umag_tab2}>22.0 && ${gmag_tab2}>22.2 && ${Jmag_tab1}-${Hmag_tab1}<0.3 && ${Hmag_tab1}-${Kmag_tab1}<0.3 {draw}}
+sync
+select XMatch
+sync
+cplane candidates
